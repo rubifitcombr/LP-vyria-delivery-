@@ -198,6 +198,14 @@ const planosPorTipo = {
   }
 } as const;
 
+type Plano = {
+  nome: string;
+  preco: number;
+  badge: string;
+  destaque?: boolean;
+  features: readonly string[];
+};
+
 const testimonials = [
   {
     name: "Caio Sergio",
@@ -728,7 +736,7 @@ export default function HomePage() {
             ) : null}
 
             <div className={`planGrid ${planosAnimating ? "planGridAnimating" : ""}`}>
-              {Object.values(planosPorTipo[tipoOperacao]).map((plan) => (
+              {(Object.values(planosPorTipo[tipoOperacao]) as Plano[]).map((plan) => (
                 <article key={plan.nome} className={`planCard ${plan.destaque ? "planHighlight" : ""}`}>
                   <span className="planBadge">{plan.badge}</span>
                   <h3>{plan.nome}</h3>
