@@ -460,7 +460,7 @@ export default function HomePage() {
   const [tipoOperacao, setTipoOperacao] = useState<TipoOperacao>("delivery");
   const [planosAnimating, setPlanosAnimating] = useState(false);
   const whatsappMessage = encodeURIComponent("Ola! Quero uma demonstracao da Vyria.");
-  const whatsappLink = `https://wa.me/5562981203941?text=${whatsappMessage}`;
+  const whatsappLink = `https://wa.me/5562994856542?text=${whatsappMessage}`;
   const instagramUrl = "https://www.instagram.com/vyriadelivery/";
 
   function handleTipoOperacao(next: TipoOperacao) {
