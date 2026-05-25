@@ -101,40 +101,6 @@ const functionalityBlocks: FunctionalityBlock[] = [
   }
 ];
 
-const GROWTH_PRO_CTA = [
-  {
-    id: "growth" as const,
-    nome: "Growth",
-    badge: "Mais popular",
-    preco: 89.9,
-    descricao: "Crescimento. Pedidos realtime, IA, entregadores/garçom, promoções",
-    features: [
-      "Pedidos em tempo real",
-      "Promoções e cupons",
-      "IA: foto cardápio + descrição",
-      "Entregadores ou garçom com QR",
-      "Relatórios de vendas"
-    ],
-    ctaLabel: "Começar com Growth"
-  },
-  {
-    id: "pro" as const,
-    nome: "Pro",
-    badge: "Completo",
-    preco: 139.9,
-    descricao: "Operação profissional. Caixa, KDS, impressão, PIX, IA completa, inventário",
-    features: [
-      "Tudo do Growth",
-      "Caixa e KDS",
-      "Impressão térmica automática",
-      "IA: foto profissional",
-      "PIX no checkout e inventário"
-    ],
-    ctaLabel: "Começar com Pro",
-    destaque: true
-  }
-];
-
 type TipoOperacao = "delivery" | "presencial" | "hibrido";
 type PlanoTier = "start" | "growth" | "pro";
 
@@ -780,8 +746,8 @@ export default function HomePage() {
 
         <section className="differentials">
           <div className="container">
-            <h2>Pronto para crescer? Escolha seu plano</h2>
-            <p className="differentialsLead">Por que escolher a Vyria</p>
+            <h2>Por que escolher a Vyria?</h2>
+            <p className="differentialsLead">O que leva sua operação do básico ao profissional</p>
             <div className="diffGrid diffGridValues">
               {differentialCards.map((card) => (
                 <article key={card.title} className="diffCard">
@@ -790,37 +756,6 @@ export default function HomePage() {
                   </span>
                   <h3>{card.title}</h3>
                   <p>{card.text}</p>
-                </article>
-              ))}
-            </div>
-            <div className="growthProGrid">
-              {GROWTH_PRO_CTA.map((plan) => (
-                <article
-                  key={plan.id}
-                  className={`growthProCard ${plan.destaque ? "growthProCardHighlight" : ""}`}
-                >
-                  <span className="growthProBadge">{plan.badge}</span>
-                  <h3>{plan.nome}</h3>
-                  <p className="growthProPrice">R${formatPlanPrice(plan.preco)}/mês</p>
-                  <p className="growthProDesc">{plan.descricao}</p>
-                  <ul className="growthProList">
-                    {plan.features.map((feature) => (
-                      <li key={feature}>
-                        <span className="featureCheck" aria-hidden="true">
-                          ✓
-                        </span>{" "}
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <a
-                    className={`btn full ${plan.destaque ? "btnDark" : "btnPrimary"}`}
-                    href={whatsappLink}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {plan.ctaLabel}
-                  </a>
                 </article>
               ))}
             </div>
@@ -1459,59 +1394,6 @@ export default function HomePage() {
         }
         .diffGrid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
         .diffGridValues { margin-bottom:32px; }
-        .growthProGrid {
-          display:grid;
-          grid-template-columns:repeat(2, minmax(0, 1fr));
-          gap:16px;
-          max-width:920px;
-          margin:0 auto;
-        }
-        .growthProCard {
-          background:#252525;
-          border:1px solid #3a3a3a;
-          border-radius:12px;
-          padding:22px;
-          text-align:left;
-          display:flex;
-          flex-direction:column;
-        }
-        .growthProCardHighlight {
-          background:${ORANGE};
-          border-color:${ORANGE};
-          color:#1a1a1a;
-          transform:scale(1.02);
-          box-shadow:0 16px 32px rgba(232,82,26,0.28);
-        }
-        .growthProCardHighlight h3,
-        .growthProCardHighlight .growthProDesc,
-        .growthProCardHighlight .growthProList { color:#1a1a1a; }
-        .growthProCardHighlight .growthProBadge { background:rgba(0,0,0,0.12); color:#1a1a1a; }
-        .growthProCardHighlight .featureCheck { color:#1a1a1a; }
-        .growthProBadge {
-          display:inline-block;
-          border-radius:999px;
-          padding:6px 10px;
-          background:#333;
-          font-size:11px;
-          font-weight:800;
-          letter-spacing:0.06em;
-          text-transform:uppercase;
-          margin-bottom:10px;
-        }
-        .growthProPrice { font-size:26px; font-weight:800; margin:0 0 8px; }
-        .growthProDesc { color:#cfcfcf; font-size:14px; line-height:1.5; margin:0 0 12px; }
-        .growthProList {
-          list-style:none;
-          padding:0;
-          margin:0 0 16px;
-          display:grid;
-          gap:8px;
-          flex:1;
-          color:#e8e8e8;
-          font-size:14px;
-        }
-        .btnDark { background:#1a1a1a; color:#fff; border:1px solid #1a1a1a; }
-        .btnDark:hover { filter:brightness(1.08); }
         .diffCard { border:1px solid #333; border-radius:12px; background:#202020; padding:20px; }
         .diffCard p { color:#d1d1d1; }
         .diffCardLink {
@@ -1524,8 +1406,15 @@ export default function HomePage() {
         .diffCardLink:hover { filter: brightness(1.06); }
         .diffIcon { width:34px; height:34px; color:${ORANGE}; display:block; }
         .diffIcon :global(svg) { width:100%; height:100%; }
-        .plans { background:${LIGHT}; padding:80px 0; text-align:center; }
-        .plans > .container > p { margin-top:8px; color:#575757; }
+        .plans {
+          background:
+            radial-gradient(circle at 52% 0%, rgba(232,82,26,.2), transparent 34%),
+            ${DARK};
+          color:#fff;
+          padding:88px 0;
+          text-align:center;
+        }
+        .plans > .container > p { margin-top:8px; color:#b8b8b8; }
         .planTypeSelector {
           margin-top: 18px;
           display: flex;
@@ -1534,9 +1423,9 @@ export default function HomePage() {
           flex-wrap: wrap;
         }
         .planTypePill {
-          border: 1px solid rgba(0,0,0,0.14);
-          background: transparent;
-          color: #6b6b6b;
+          border: 1px solid rgba(255,255,255,0.16);
+          background: rgba(255,255,255,0.04);
+          color: #f2f2f2;
           border-radius: 999px;
           padding: 10px 14px;
           font-weight: 700;
@@ -1553,6 +1442,7 @@ export default function HomePage() {
           background: ${ORANGE};
           color: #fff;
           border-color: transparent;
+          box-shadow: 0 10px 24px rgba(232,82,26,.28);
         }
         .plansPanel {
           margin-top: 28px;
@@ -1572,35 +1462,44 @@ export default function HomePage() {
           justify-content: center;
         }
         .planCard {
-          background: #fff;
-          border: 1px solid #ece5db;
-          border-radius: 12px;
+          background:#252525;
+          border:1px solid #3a3a3a;
+          border-radius:14px;
           padding: 20px;
           transition: .2s ease;
           display: flex;
           flex-direction: column;
         }
-        .planCard:hover { transform:translateY(-4px); box-shadow:0 14px 22px rgba(0,0,0,.08); }
-        .planHighlight { border-color:${ORANGE}; box-shadow:0 0 0 1px ${ORANGE}; }
-        .planBadge { display:inline-block; border-radius:999px; padding:6px 10px; background:#f2f2f2; font-size:12px; font-weight:700; }
+        .planCard:hover { transform:translateY(-4px); box-shadow:0 18px 32px rgba(0,0,0,.28); }
+        .planHighlight {
+          background:${ORANGE};
+          border-color:${ORANGE};
+          color:#1a1a1a;
+          box-shadow:0 18px 36px rgba(232,82,26,.32);
+          transform:scale(1.02);
+        }
+        .planBadge { display:inline-block; border-radius:999px; padding:6px 10px; background:#333; color:#fff; font-size:12px; font-weight:700; }
+        .planHighlight .planBadge { background:rgba(0,0,0,.14); color:#1a1a1a; }
         .planCard h3 { margin: 14px 0 6px; font-size: clamp(24px, 2.6vw, 30px); }
         .price { font-size:24px; font-weight:700; margin-bottom:10px; }
         .planDesc {
-          color: #5a5a5a;
+          color: #d1d1d1;
           font-size: 14px;
           line-height: 1.55;
           margin: 0 0 16px;
           flex: 1;
         }
+        .planHighlight .planDesc { color:#1a1a1a; }
+        .planHighlight .btnPrimary { background:#1a1a1a; color:#fff; border-color:#1a1a1a; }
         .planCompareWrap {
           margin-top: 28px;
           overflow-x: auto;
           -webkit-overflow-scrolling: touch;
-          border: 1px solid #ece5db;
+          border: 1px solid #3a3a3a;
           border-radius: 16px;
-          background: #fff;
+          background: #202020;
           text-align: left;
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
         }
         .planCompareHead {
           display: flex;
@@ -1608,24 +1507,24 @@ export default function HomePage() {
           justify-content: space-between;
           gap: 16px;
           padding: 20px 20px 12px;
-          border-bottom: 1px solid #f0ebe3;
+          border-bottom: 1px solid #333;
         }
         .planCompareTitle {
           margin: 0 0 4px;
           font-size: clamp(20px, 2.4vw, 26px);
           font-weight: 800;
-          color: #1a1a1a;
+          color: #fff;
         }
         .planCompareSubtitle {
           margin: 0;
           font-size: 14px;
-          color: #6b6b6b;
+          color: #b8b8b8;
         }
         .planCompareMode {
           flex-shrink: 0;
           border-radius: 999px;
           padding: 8px 14px;
-          background: rgba(232, 82, 26, 0.1);
+          background: rgba(232, 82, 26, 0.18);
           color: ${ORANGE};
           font-size: 12px;
           font-weight: 800;
@@ -1637,8 +1536,8 @@ export default function HomePage() {
           flex-wrap: wrap;
           gap: 16px;
           padding: 12px 20px;
-          border-bottom: 1px solid #f0ebe3;
-          background: #faf8f5;
+          border-bottom: 1px solid #333;
+          background: #252525;
         }
         .planCompareLegendItem {
           display: inline-flex;
@@ -1646,7 +1545,7 @@ export default function HomePage() {
           gap: 8px;
           font-size: 13px;
           font-weight: 600;
-          color: #555;
+          color: #d8d8d8;
         }
         .planCompareTable {
           width: 100%;
@@ -1658,14 +1557,14 @@ export default function HomePage() {
         .planCompareTable th,
         .planCompareTable td {
           padding: 14px 16px;
-          border-bottom: 1px solid #f0ebe3;
+          border-bottom: 1px solid #333;
           text-align: center;
           vertical-align: middle;
         }
         .planCompareTable thead th {
-          background: #faf8f5;
+          background: #252525;
           font-weight: 700;
-          color: #333;
+          color: #fff;
           position: sticky;
           top: 0;
           z-index: 2;
@@ -1676,14 +1575,14 @@ export default function HomePage() {
           position: sticky;
           left: 0;
           z-index: 3;
-          background: #faf8f5;
+          background: #252525;
           box-shadow: 4px 0 8px rgba(0, 0, 0, 0.04);
         }
         .planCompareTierCol {
           min-width: 120px;
         }
         .planCompareTierColHighlight {
-          background: rgba(232, 82, 26, 0.08) !important;
+          background: rgba(232, 82, 26, 0.16) !important;
           box-shadow: inset 0 0 0 1px rgba(232, 82, 26, 0.18);
         }
         .planCompareTierName {
@@ -1705,48 +1604,48 @@ export default function HomePage() {
           margin-bottom: 8px;
         }
         .planCompareTierBadgeMuted {
-          background: #e8e8e8;
-          color: #666;
+          background: #3a3a3a;
+          color: #d8d8d8;
         }
         .planCompareTierPrice {
           display: block;
           font-size: 13px;
           font-weight: 700;
-          color: #444;
+          color: #cfcfcf;
         }
         .planCompareTable tbody th[scope="row"] {
           text-align: left;
           font-weight: 600;
-          color: #333;
+          color: #f5f5f5;
           min-width: 240px;
           position: sticky;
           left: 0;
           z-index: 1;
-          background: #fff;
+          background: #202020;
           box-shadow: 4px 0 8px rgba(0, 0, 0, 0.04);
         }
         .planCompareRowEven th[scope="row"],
         .planCompareRowEven td {
-          background-color: #fcfaf7;
+          background-color: #242424;
         }
         .planCompareTable tbody tr:hover th[scope="row"] {
-          background-color: #fff6f1;
+          background-color: #2b2b2b;
         }
         .planCompareTable tbody tr:hover td:not(.planCompareTierColHighlight) {
-          background-color: #fff6f1;
+          background-color: #2b2b2b;
         }
         .planCompareTable tbody tr:hover td.planCompareTierColHighlight {
-          background-color: rgba(232, 82, 26, 0.14) !important;
+          background-color: rgba(232, 82, 26, 0.22) !important;
         }
         .planCompareTable tbody tr:last-child th,
         .planCompareTable tbody tr:last-child td {
           border-bottom: none;
         }
         .planCompareCellYes {
-          background-color: rgba(34, 197, 94, 0.06);
+          background-color: rgba(34, 197, 94, 0.08);
         }
         .planCompareCellNo {
-          background-color: rgba(0, 0, 0, 0.02);
+          background-color: rgba(255, 255, 255, 0.03);
         }
         .planMark {
           display: inline-flex;
@@ -1775,12 +1674,12 @@ export default function HomePage() {
         }
         .planMarkIconNo,
         .planMarkExcluded .planMarkIcon {
-          background: #f3f3f3;
+          background: #333;
           color: #a3a3a3;
-          border: 1px solid #e0e0e0;
+          border: 1px solid #454545;
           font-size: 16px;
         }
-        .plansDisclaimer { margin: 16px 0 0; color: #7a7a7a; font-size: 12px; }
+        .plansDisclaimer { margin: 16px 0 0; color: #b8b8b8; font-size: 12px; }
         .plansHelp { margin-top:20px; display:inline-block; color:${ORANGE}; font-weight:600; }
         .testimonials { padding:80px 0; text-align:center; background:#fff; }
         .reviewTrustBar {
@@ -2000,9 +1899,8 @@ export default function HomePage() {
         @media (max-width: 1024px) {
           .navLinks { display:none; }
           .menuButton { display:block; }
-          .heroGrid, .featureGrid, .contactGrid, .growthProGrid { grid-template-columns:1fr; }
+          .heroGrid, .featureGrid, .contactGrid { grid-template-columns:1fr; }
           .featureGrid.reverse { direction:ltr; }
-          .growthProCardHighlight { transform:none; }
           .diffGrid { grid-template-columns:repeat(2,1fr); }
           .planGrid { grid-template-columns:repeat(2,1fr); }
           .testGrid { grid-template-columns:repeat(2,1fr); align-items:start; }
