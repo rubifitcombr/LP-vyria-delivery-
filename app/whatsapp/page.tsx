@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 
 const ORANGE = "#E8521A";
 const DARK = "#161616";
@@ -162,7 +161,7 @@ export default function WhatsAppPage() {
     <main className="whatsPage">
       <header className="hero">
         <nav className="container nav">
-          <Link href="/" className="brand" aria-label="Voltar para Vyria Delivery">
+          <a href="/" className="brand" aria-label="Voltar para Vyria Delivery">
             <span className="brandMark">
               <Image src="/logo.png" alt="Vyria Delivery" width={38} height={38} className="brandLogo" priority />
             </span>
@@ -170,7 +169,7 @@ export default function WhatsAppPage() {
               <strong>Vyria</strong>
               <small>Robô de WhatsApp</small>
             </span>
-          </Link>
+          </a>
           <a className="navCta" href={WHATSAPP_LINK} target="_blank" rel="noreferrer">
             Ver demonstração
           </a>
@@ -461,17 +460,9 @@ export default function WhatsAppPage() {
           min-height: 760px;
           color: #fff;
           background:
-            linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-            linear-gradient(180deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
             radial-gradient(circle at 74% 18%, rgba(18, 183, 106, 0.28), transparent 30%),
             radial-gradient(circle at 20% 72%, rgba(232, 82, 26, 0.18), transparent 26%),
             linear-gradient(140deg, #101010 0%, ${DARK} 58%, #102018 100%);
-          background-size:
-            58px 58px,
-            58px 58px,
-            auto,
-            auto,
-            auto;
         }
         .nav {
           min-height: 78px;
@@ -720,17 +711,9 @@ export default function WhatsAppPage() {
         .painSection {
           position: relative;
           background:
-            linear-gradient(90deg, rgba(232, 82, 26, 0.05) 1px, transparent 1px),
-            linear-gradient(180deg, rgba(232, 82, 26, 0.04) 1px, transparent 1px),
             radial-gradient(circle at 82% 8%, rgba(232, 82, 26, 0.18), transparent 30%),
             radial-gradient(circle at 14% 78%, rgba(180, 35, 24, 0.1), transparent 28%),
             linear-gradient(180deg, #fff7f1 0%, #fbfaf8 58%, #fff 100%);
-          background-size:
-            56px 56px,
-            56px 56px,
-            auto,
-            auto,
-            auto;
           overflow: hidden;
         }
         .painSection::before {
@@ -828,17 +811,9 @@ export default function WhatsAppPage() {
         .flowSection {
           position: relative;
           background:
-            linear-gradient(90deg, rgba(18, 183, 106, 0.045) 1px, transparent 1px),
-            linear-gradient(180deg, rgba(18, 183, 106, 0.04) 1px, transparent 1px),
             radial-gradient(circle at 50% 0%, rgba(18, 183, 106, 0.18), transparent 32%),
             radial-gradient(circle at 90% 70%, rgba(232, 82, 26, 0.08), transparent 28%),
             linear-gradient(180deg, #f4fff8 0%, #ffffff 72%);
-          background-size:
-            62px 62px,
-            62px 62px,
-            auto,
-            auto,
-            auto;
           overflow: hidden;
         }
         .flowSection::before {
