@@ -261,17 +261,28 @@ export default function WhatsAppPage() {
           <h2>A Vyria responde automaticamente e direciona o cliente para o pedido.</h2>
         </div>
 
-        <div className="container stepGrid">
-          {steps.map((step) => (
-            <article key={step.number} className="stepCard">
-              <span className="stepIcon" aria-hidden="true">
-                {step.icon}
-              </span>
-              <small>{step.number}</small>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
-            </article>
-          ))}
+        <div className="container flowContent">
+          <div className="shortFrame">
+            <iframe
+              src="https://www.youtube.com/embed/1dOoUZAeU00"
+              title="Demonstração do robô de WhatsApp Vyria"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+
+          <div className="stepGrid">
+            {steps.map((step) => (
+              <article key={step.number} className="stepCard">
+                <span className="stepIcon" aria-hidden="true">
+                  {step.icon}
+                </span>
+                <small>{step.number}</small>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -747,6 +758,7 @@ export default function WhatsAppPage() {
         .painSection .sectionHead,
         .painSection .painGrid,
         .flowSection .sectionHead,
+        .flowSection .flowContent,
         .flowSection .stepGrid {
           position: relative;
           z-index: 1;
@@ -851,12 +863,35 @@ export default function WhatsAppPage() {
           border: 1px solid rgba(18, 183, 106, 0.18);
           transform: rotate(-10deg);
         }
+        .flowContent {
+          display: grid;
+          grid-template-columns: minmax(240px, 0.38fr) minmax(0, 1fr);
+          gap: 28px;
+          align-items: stretch;
+          margin-top: 54px;
+        }
+        .shortFrame {
+          position: relative;
+          min-height: 560px;
+          border: 1px solid rgba(18, 183, 106, 0.16);
+          border-radius: 34px;
+          overflow: hidden;
+          background: #101010;
+          box-shadow: 0 32px 80px rgba(16, 16, 16, 0.12);
+        }
+        .shortFrame iframe {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
         .stepGrid {
           position: relative;
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 0;
-          margin-top: 54px;
+          margin-top: 0;
           padding: 28px;
           border: 1px solid rgba(18, 183, 106, 0.16);
           border-radius: 34px;
@@ -1405,6 +1440,7 @@ export default function WhatsAppPage() {
           .heroGrid,
           .splitGrid,
           .operationGrid,
+          .flowContent,
           .stepGrid,
           .testimonialGrid,
           .faqGrid,
@@ -1417,6 +1453,13 @@ export default function WhatsAppPage() {
           }
           .heroVisual {
             justify-items: center;
+          }
+          .shortFrame {
+            width: min(360px, 100%);
+            min-height: auto;
+            aspect-ratio: 9 / 16;
+            margin: 0 auto;
+            border-radius: 28px;
           }
           .stepGrid::before {
             top: 42px;
@@ -1527,6 +1570,14 @@ export default function WhatsAppPage() {
           .comparisonGrid {
             gap: 12px;
             margin-top: 24px;
+          }
+          .flowContent {
+            gap: 18px;
+            margin-top: 28px;
+          }
+          .shortFrame {
+            width: min(280px, 82vw);
+            border-radius: 24px;
           }
           .stepGrid {
             padding: 10px 18px;
