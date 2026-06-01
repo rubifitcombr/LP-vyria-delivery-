@@ -203,9 +203,15 @@ export default function WhatsAppPage() {
             <div className="chatPhone">
               <div className="phoneTop" />
               <div className="chatHeader">
-                <span className="avatar">V</span>
+                <span className="avatar" aria-hidden="true">
+                  <img
+                    src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=96&q=80"
+                    alt=""
+                    loading="lazy"
+                  />
+                </span>
                 <div>
-                  <strong>Vyria Assistente</strong>
+                  <strong>Pizzaria Elshaday</strong>
                   <small>online agora</small>
                 </div>
               </div>
@@ -226,11 +232,6 @@ export default function WhatsAppPage() {
                 <p className="bubble customer customerSuccess">Vou pedir por lá 👍</p>
               </div>
               <div className="chatInput">Digite uma mensagem</div>
-            </div>
-            <div className="floatingCard">
-              <span>Link do cardápio</span>
-              <strong>Enviado</strong>
-              <small>Cliente direcionado para o pedido</small>
             </div>
           </div>
         </section>
@@ -635,8 +636,15 @@ export default function WhatsAppPage() {
           border-radius: 50%;
           display: grid;
           place-items: center;
-          background: ${ORANGE};
-          font-weight: 900;
+          border: 2px solid rgba(255, 255, 255, 0.36);
+          background: #fff;
+          overflow: hidden;
+        }
+        .avatar :global(img) {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
         }
         .chatHeader strong,
         .chatHeader small {
@@ -694,39 +702,6 @@ export default function WhatsAppPage() {
           color: #777;
           background: #fff;
           font-size: 13px;
-        }
-        .floatingCard {
-          position: absolute;
-          left: 0;
-          bottom: 86px;
-          width: 210px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          border-radius: 22px;
-          padding: 18px;
-          background: rgba(255, 255, 255, 0.94);
-          color: #111;
-          box-shadow: 0 22px 48px rgba(0, 0, 0, 0.25);
-          backdrop-filter: blur(10px);
-        }
-        .floatingCard span,
-        .floatingCard strong,
-        .floatingCard small {
-          display: block;
-        }
-        .floatingCard span {
-          color: ${GREEN};
-          font-size: 12px;
-          font-weight: 900;
-          text-transform: uppercase;
-        }
-        .floatingCard strong {
-          margin-top: 6px;
-          font-size: 42px;
-          line-height: 1;
-        }
-        .floatingCard small {
-          margin-top: 6px;
-          color: #666;
         }
         .section {
           padding: 112px 0;
@@ -1443,9 +1418,6 @@ export default function WhatsAppPage() {
           .heroVisual {
             justify-items: center;
           }
-          .floatingCard {
-            left: 4%;
-          }
           .stepGrid::before {
             top: 42px;
             bottom: 42px;
@@ -1528,12 +1500,6 @@ export default function WhatsAppPage() {
           .chatPhone {
             width: min(320px, 94vw);
             min-height: auto;
-          }
-          .floatingCard {
-            position: relative;
-            left: auto;
-            bottom: auto;
-            margin: -22px auto 0;
           }
           .painGrid {
             grid-template-columns: 1fr;
