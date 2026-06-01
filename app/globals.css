@@ -22,6 +22,84 @@ a {
   text-decoration: none;
 }
 
+.floatingSocials {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  display: grid;
+  gap: 12px;
+}
+
+.floatingSocial {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  box-shadow: 0 14px 34px rgba(16, 16, 16, 0.22);
+  isolation: isolate;
+}
+
+.floatingSocial::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: inherit;
+  z-index: -1;
+  animation: floatingPulse 1.8s ease-out infinite;
+}
+
+.floatingSocial svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.floatingWhatsapp {
+  background: #25d366;
+}
+
+.floatingInstagram {
+  background: linear-gradient(135deg, #f58529 0%, #dd2a7b 45%, #8134af 100%);
+}
+
+@keyframes floatingPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  75% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .floatingSocials {
+    right: 14px;
+    bottom: 14px;
+    gap: 10px;
+  }
+
+  .floatingSocial {
+    width: 50px;
+    height: 50px;
+  }
+
+  .floatingSocial svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
 .autoPage {
   color: #111;
   background: #fff;
