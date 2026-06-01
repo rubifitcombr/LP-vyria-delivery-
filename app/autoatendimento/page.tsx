@@ -85,6 +85,49 @@ const afterItems = [
   "Mais faturamento"
 ] as const;
 
+const testimonials = [
+  {
+    name: "Ana Paula Andrade",
+    business: "Restaurante",
+    date: "25 Fevereiro 2026",
+    selfie: "https://randomuser.me/api/portraits/women/68.jpg",
+    text: "Com o QR Code nas mesas, os pedidos chegam mais organizados e a equipe fica menos sobrecarregada nos horários de pico."
+  },
+  {
+    name: "Alan Barbosa",
+    business: "Pizzaria",
+    date: "20 Fevereiro 2026",
+    selfie: "https://randomuser.me/api/portraits/men/41.jpg",
+    text: "O cliente pede sem esperar o garçom e a cozinha recebe tudo mais claro. A operação ganhou velocidade."
+  },
+  {
+    name: "Monique Peres",
+    business: "Lanchonete",
+    date: "17 Marco 2026",
+    selfie: "https://randomuser.me/api/portraits/women/44.jpg",
+    text: "Ficou mais fácil vender adicionais e evitar erro de anotação. O salão roda com muito menos correria."
+  }
+] as const;
+
+const faqs = [
+  {
+    question: "O cliente precisa instalar aplicativo para pedir?",
+    answer: "Não. Ele escaneia o QR Code da mesa e acessa o cardápio pelo navegador do próprio celular."
+  },
+  {
+    question: "Os pedidos chegam direto para a cozinha?",
+    answer: "Sim. O pedido entra organizado no painel da Vyria para sua equipe acompanhar, preparar e entregar."
+  },
+  {
+    question: "Dá para usar o autoatendimento junto com garçons?",
+    answer: "Sim. O QR Code reduz pedidos repetitivos e deixa os garçons livres para entrega, suporte e venda consultiva."
+  },
+  {
+    question: "Serve para bares, restaurantes e lanchonetes?",
+    answer: "Serve para qualquer operação com atendimento em mesa que quer reduzir espera, erros e correria no salão."
+  }
+] as const;
+
 export default function AutoatendimentoPage() {
   return (
     <main className="autoPage">
@@ -230,6 +273,68 @@ export default function AutoatendimentoPage() {
               ))}
             </ul>
           </article>
+        </div>
+      </section>
+
+      <section className="section proofSection">
+        <div className="container sectionHead">
+          <p className="eyebrow">Depoimentos</p>
+          <h2>Quem usa a Vyria no atendimento sente a operação mais leve.</h2>
+        </div>
+
+        <div className="container reviewTrustBar">
+          <div className="reviewTrustInfo">
+            <span className="reviewGoogleBadge" aria-label="Google">
+              <span className="gBlue">G</span>
+              <span className="gRed">o</span>
+              <span className="gYellow">o</span>
+              <span className="gBlue">g</span>
+              <span className="gGreen">l</span>
+              <span className="gRed">e</span>
+            </span>
+            <strong>Excelente</strong>
+            <span className="reviewStars">★★★★★</span>
+            <small>5.0 | 433 avaliações</small>
+          </div>
+          <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="reviewWriteBtn">
+            Ver demonstração
+          </a>
+        </div>
+
+        <div className="container testimonialGrid">
+          {testimonials.map((item) => (
+            <article key={item.name} className="testimonialCard">
+              <header className="testimonialHeader">
+                <div className="reviewAvatar">
+                  <img src={item.selfie} alt={`Foto de ${item.name}`} loading="lazy" />
+                </div>
+                <div>
+                  <h3>{item.name}</h3>
+                  <small>{item.date}</small>
+                  <p>{item.business}</p>
+                </div>
+              </header>
+              <span className="testimonialStars">★★★★★</span>
+              <p className="testimonialQuote">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section faqSection">
+        <div className="container faqGrid">
+          <div>
+            <p className="eyebrow">FAQ</p>
+            <h2>Perguntas frequentes sobre autoatendimento.</h2>
+          </div>
+          <div className="faqList">
+            {faqs.map((faq) => (
+              <details key={faq.question} className="faqItem">
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -739,6 +844,176 @@ export default function AutoatendimentoPage() {
           font-size: 13px;
           font-weight: 900;
         }
+        .proofSection {
+          background:
+            radial-gradient(circle at 82% 12%, rgba(232, 82, 26, 0.08), transparent 28%),
+            #fff;
+        }
+        .reviewTrustBar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-top: 34px;
+          border: 1px solid #ececec;
+          border-radius: 18px;
+          padding: 12px 14px;
+          background: #fff;
+          box-shadow: 0 16px 38px rgba(16, 16, 16, 0.05);
+        }
+        .reviewTrustInfo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+        .reviewGoogleBadge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5px;
+          border: 1px solid #e6e6e6;
+          border-radius: 999px;
+          padding: 5px 10px;
+          background: #fff;
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: -0.01em;
+          line-height: 1;
+        }
+        .gBlue {
+          color: #4285f4;
+        }
+        .gRed {
+          color: #ea4335;
+        }
+        .gYellow {
+          color: #fbbc05;
+        }
+        .gGreen {
+          color: #34a853;
+        }
+        .reviewTrustInfo strong {
+          color: #1f1f1f;
+          font-size: 15px;
+        }
+        .reviewStars,
+        .testimonialStars {
+          color: #ffb400;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+        }
+        .reviewTrustInfo small {
+          color: #5f6368;
+          font-size: 13px;
+        }
+        .reviewWriteBtn {
+          border: 1px solid #e1e1e1;
+          border-radius: 10px;
+          padding: 9px 12px;
+          background: #fff;
+          color: #202124;
+          font-size: 13px;
+          font-weight: 800;
+        }
+        .testimonialGrid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          margin-top: 18px;
+        }
+        .testimonialCard {
+          border: 1px solid #ece7e2;
+          border-radius: 22px;
+          padding: 18px;
+          background: #fff;
+          box-shadow: 0 18px 44px rgba(16, 16, 16, 0.06);
+        }
+        .testimonialHeader {
+          display: grid;
+          grid-template-columns: 42px minmax(0, 1fr);
+          gap: 10px;
+          align-items: start;
+        }
+        .reviewAvatar {
+          width: 42px;
+          height: 42px;
+          border: 1px solid #ececec;
+          border-radius: 50%;
+          overflow: hidden;
+          background: #f3f3f3;
+        }
+        .reviewAvatar :global(img) {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+        }
+        .testimonialHeader h3 {
+          margin: 0 0 2px;
+          font-size: 17px;
+        }
+        .testimonialHeader small {
+          display: block;
+          color: #7a7a7a;
+          font-size: 12px;
+        }
+        .testimonialHeader p {
+          margin: 2px 0 0;
+          color: #4b4b4b;
+          font-size: 13px;
+        }
+        .testimonialStars {
+          display: inline-block;
+          margin: 12px 0 8px;
+          font-size: 13px;
+        }
+        .testimonialQuote {
+          margin: 0;
+          color: #454545;
+          font-size: 15px;
+          line-height: 1.6;
+        }
+        .faqSection {
+          background:
+            radial-gradient(circle at 16% 12%, rgba(232, 82, 26, 0.08), transparent 30%),
+            #fbfaf8;
+        }
+        .faqGrid {
+          display: grid;
+          grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+          gap: 42px;
+          align-items: start;
+        }
+        .faqGrid h2 {
+          margin: 0;
+          color: #111;
+          font-size: clamp(32px, 4vw, 52px);
+          line-height: 1;
+          letter-spacing: -0.03em;
+        }
+        .faqList {
+          display: grid;
+          gap: 12px;
+        }
+        .faqItem {
+          border: 1px solid #ece7e2;
+          border-radius: 18px;
+          padding: 18px 20px;
+          background: #fff;
+          box-shadow: 0 14px 34px rgba(16, 16, 16, 0.05);
+        }
+        .faqItem summary {
+          cursor: pointer;
+          color: #111;
+          font-size: 18px;
+          font-weight: 900;
+        }
+        .faqItem p {
+          margin: 12px 0 0;
+          color: #5f5f5f;
+          line-height: 1.65;
+        }
         .finalCta {
           padding: 112px 0;
           background:
@@ -782,6 +1057,8 @@ export default function AutoatendimentoPage() {
           .heroGrid,
           .splitGrid,
           .stepGrid,
+          .testimonialGrid,
+          .faqGrid,
           .comparisonGrid {
             grid-template-columns: 1fr;
           }
@@ -945,6 +1222,23 @@ export default function AutoatendimentoPage() {
           .featureGrid {
             grid-template-columns: 1fr;
             gap: 10px;
+          }
+          .reviewTrustBar {
+            align-items: flex-start;
+            flex-direction: column;
+          }
+          .testimonialGrid {
+            gap: 12px;
+          }
+          .faqGrid {
+            gap: 18px;
+          }
+          .faqItem {
+            border-radius: 14px;
+            padding: 16px;
+          }
+          .faqItem summary {
+            font-size: 16px;
           }
           .featurePill {
             border-radius: 14px;
