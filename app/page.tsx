@@ -549,7 +549,7 @@ export default function HomePage() {
           </Link>
           <nav className="navLinks">
             <a href="#funcionalidades">Funcionalidades</a>
-            <a href="#planos">Planos</a>
+            <Link href="/planos">Planos</Link>
             <a href="#depoimentos">Depoimentos</a>
             <a href="#contato">Contato</a>
           </nav>
@@ -564,7 +564,7 @@ export default function HomePage() {
         <div className="drawerPanel">
           <button className="closeDrawer" onClick={() => setMenuOpen(false)} aria-label="Fechar menu">x</button>
           <a href="#funcionalidades" onClick={() => setMenuOpen(false)}>Funcionalidades</a>
-          <a href="#planos" onClick={() => setMenuOpen(false)}>Planos</a>
+          <Link href="/planos" onClick={() => setMenuOpen(false)}>Planos</Link>
           <a href="#depoimentos" onClick={() => setMenuOpen(false)}>Depoimentos</a>
           <a href="#contato" onClick={() => setMenuOpen(false)}>Contato</a>
         </div>
@@ -981,7 +981,7 @@ export default function HomePage() {
             <p className="footerLabel">PRODUTO</p>
             <div className="footerLinkList">
               <a href="#funcionalidades">Funcionalidades</a>
-              <a href="#planos">Planos</a>
+              <Link href="/planos">Planos</Link>
             </div>
             <p className="footerLabel">SUPORTE</p>
             <div className="footerLinkList">

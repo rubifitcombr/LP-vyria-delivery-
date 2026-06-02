@@ -11,7 +11,9 @@ const WHATSAPP_LINKS_BY_PATH: Record<string, string> = {
   "/whatsapp":
     "https://wa.me/5562994856542?text=Ol%C3%A1!%20Quero%20conhecer%20o%20rob%C3%B4%20de%20WhatsApp%20da%20Vyria.",
   "/organizacao":
-    "https://wa.me/5562994856542?text=Ol%C3%A1!%20Quero%20conhecer%20a%20gest%C3%A3o%20de%20pedidos%20e%20KDS%20da%20Vyria."
+    "https://wa.me/5562994856542?text=Ol%C3%A1!%20Quero%20conhecer%20a%20gest%C3%A3o%20de%20pedidos%20e%20KDS%20da%20Vyria.",
+  "/planos":
+    "https://wa.me/5562994856542?text=Ol%C3%A1!%20Quero%20conhecer%20os%20planos%20e%20modelos%20de%20opera%C3%A7%C3%A3o%20da%20Vyria."
 };
 
 export function FloatingSocials() {
