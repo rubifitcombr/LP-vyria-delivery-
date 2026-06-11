@@ -3,6 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { CheckoutIframeModal } from "@/components/checkout-iframe-modal";
+import { ExitIntentOfferModal } from "@/components/exit-intent-offer-modal";
+import { MidPageOfferModal } from "@/components/mid-page-offer-modal";
 
 const ORANGE = "#E8521A";
 const PRIMARY = "#0284C7";
@@ -14,6 +17,18 @@ const BORDER = "#E5E7EB";
 const BG_SOFT = "#F8FAFC";
 const WHATSAPP_LINK =
   "https://wa.me/5562994856542?text=Ol%C3%A1!%20Quero%20conhecer%20os%20planos%20e%20modelos%20de%20opera%C3%A7%C3%A3o%20da%20Vyria.";
+const DELIVERY_PRESENCIAL_START_ANNUAL_CHECKOUT_LINK = "https://pay.cakto.com.br/iwoaphb";
+const DELIVERY_PRESENCIAL_START_MONTHLY_CHECKOUT_LINK = "https://pay.cakto.com.br/3e6d763_923411";
+const DELIVERY_PRESENCIAL_GROWTH_ANNUAL_CHECKOUT_LINK = "https://pay.cakto.com.br/shvito7";
+const DELIVERY_PRESENCIAL_GROWTH_MONTHLY_CHECKOUT_LINK = "https://pay.cakto.com.br/y8e8o3g_923431";
+const DELIVERY_PRESENCIAL_PRO_ANNUAL_CHECKOUT_LINK = "https://pay.cakto.com.br/k4qy77y";
+const DELIVERY_PRESENCIAL_PRO_MONTHLY_CHECKOUT_LINK = "https://pay.cakto.com.br/cy6zdd5_923441";
+const COMPLETO_START_ANNUAL_CHECKOUT_LINK = "https://pay.cakto.com.br/9g3z5ok";
+const COMPLETO_START_MONTHLY_CHECKOUT_LINK = "https://pay.cakto.com.br/e5nj5bt_903061";
+const COMPLETO_GROWTH_ANNUAL_CHECKOUT_LINK = "https://pay.cakto.com.br/362y2pd";
+const COMPLETO_GROWTH_MONTHLY_CHECKOUT_LINK = "https://pay.cakto.com.br/38gasay_903090";
+const COMPLETO_PRO_ANNUAL_CHECKOUT_LINK = "https://pay.cakto.com.br/t82pyo6";
+const COMPLETO_PRO_MONTHLY_CHECKOUT_LINK = "https://pay.cakto.com.br/35qmyn2_903104";
 
 type TipoOperacao = "delivery" | "presencial" | "hibrido";
 type PlanoTier = "start" | "growth" | "pro";
@@ -288,6 +303,7 @@ const deliveryPlanCards: Record<
     features: string[];
     ctaLabel: string;
     ctaVariant: "outline" | "primary" | "premium";
+    revenueHighlight: string;
   }
 > = {
   start: {
@@ -297,7 +313,8 @@ const deliveryPlanCards: Record<
       "Ideal para novos estabelecimentos e operações que precisam de um cardápio digital rápido e um controle financeiro sem dor de cabeça.",
     features: planCardFeaturesByOperation.delivery.start,
     ctaLabel: "Começar Agora",
-    ctaVariant: "outline"
+    ctaVariant: "outline",
+    revenueHighlight: "Média: +$3k/mês em 90 dias"
   },
   growth: {
     title: "Delivery Growth",
@@ -306,7 +323,8 @@ const deliveryPlanCards: Record<
       "Receba pedidos em tempo real, automatize confirmações no WhatsApp, gerencie entregadores e aumente suas vendas com promoções e inteligência artificial.",
     features: planCardFeaturesByOperation.delivery.growth,
     ctaLabel: "Acelerar meu Negócio",
-    ctaVariant: "primary"
+    ctaVariant: "primary",
+    revenueHighlight: "Média: +$8k/mês em 90 dias"
   },
   pro: {
     title: "Delivery Pro",
@@ -315,7 +333,8 @@ const deliveryPlanCards: Record<
       "Controle cozinha, estoque, financeiro e pedidos em um único fluxo sincronizado.",
     features: planCardFeaturesByOperation.delivery.pro,
     ctaLabel: "Garantir Operação Profissional",
-    ctaVariant: "premium"
+    ctaVariant: "premium",
+    revenueHighlight: "Média: +$15k/mês em 90 dias"
   }
 };
 
@@ -395,6 +414,59 @@ function getPlanPrice(value: number, billingCycle: BillingCycle) {
   return billingCycle === "annual" ? value * 0.8 : value;
 }
 
+function getPlanCtaHref(operation: TipoOperacao, tier: PlanoTier, billingCycle: BillingCycle) {
+  if (
+    (operation === "delivery" || operation === "presencial") &&
+    tier === "start"
+  ) {
+    return billingCycle === "annual"
+      ? DELIVERY_PRESENCIAL_START_ANNUAL_CHECKOUT_LINK
+      : DELIVERY_PRESENCIAL_START_MONTHLY_CHECKOUT_LINK;
+  }
+
+  if (
+    (operation === "delivery" || operation === "presencial") &&
+    tier === "growth"
+  ) {
+    return billingCycle === "annual"
+      ? DELIVERY_PRESENCIAL_GROWTH_ANNUAL_CHECKOUT_LINK
+      : DELIVERY_PRESENCIAL_GROWTH_MONTHLY_CHECKOUT_LINK;
+  }
+
+  if (
+    (operation === "delivery" || operation === "presencial") &&
+    tier === "pro"
+  ) {
+    return billingCycle === "annual"
+      ? DELIVERY_PRESENCIAL_PRO_ANNUAL_CHECKOUT_LINK
+      : DELIVERY_PRESENCIAL_PRO_MONTHLY_CHECKOUT_LINK;
+  }
+
+  if (operation === "hibrido" && tier === "start") {
+    return billingCycle === "annual"
+      ? COMPLETO_START_ANNUAL_CHECKOUT_LINK
+      : COMPLETO_START_MONTHLY_CHECKOUT_LINK;
+  }
+
+  if (operation === "hibrido" && tier === "growth") {
+    return billingCycle === "annual"
+      ? COMPLETO_GROWTH_ANNUAL_CHECKOUT_LINK
+      : COMPLETO_GROWTH_MONTHLY_CHECKOUT_LINK;
+  }
+
+  if (operation === "hibrido" && tier === "pro") {
+    return billingCycle === "annual"
+      ? COMPLETO_PRO_ANNUAL_CHECKOUT_LINK
+      : COMPLETO_PRO_MONTHLY_CHECKOUT_LINK;
+  }
+
+  return WHATSAPP_LINK;
+}
+
+function isCheckoutHref(href: string) {
+  return href.startsWith("https://pay.cakto.com.br/");
+}
+
 function getHeroPlanContent(operation: TipoOperacao, tier: (typeof planTiers)[number]) {
   if (operation === "delivery") {
     return deliveryPlanCards[tier.id];
@@ -409,7 +481,8 @@ function getHeroPlanContent(operation: TipoOperacao, tier: (typeof planTiers)[nu
     description: tier.description,
     features: planCardFeaturesByOperation[operation][tier.id],
     ctaLabel: "Começar agora",
-    ctaVariant: tier.highlight ? "primary" : "outline"
+    ctaVariant: tier.highlight ? "primary" : "outline",
+    revenueHighlight: deliveryPlanCards[tier.id].revenueHighlight
   } as const;
 }
 
@@ -634,10 +707,17 @@ export default function PlanosPage() {
   const [operation, setOperation] = useState<TipoOperacao>("delivery");
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("annual");
   const [isIncludeSliderPaused, setIncludeSliderPaused] = useState(false);
+  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
   const activeOperation = operationModels.find((item) => item.id === operation) ?? operationModels[0];
 
   return (
     <main className="plansPage">
+      {checkoutUrl ? (
+        <CheckoutIframeModal checkoutUrl={checkoutUrl} onClose={() => setCheckoutUrl(null)} />
+      ) : null}
+      <ExitIntentOfferModal />
+      <MidPageOfferModal />
+
       <section className="hero">
         <header className="topBar">
           <nav className="topBarInner container" aria-label="Navegação principal">
@@ -748,13 +828,14 @@ export default function PlanosPage() {
             <span className="billingDiscount">Economize até 20%</span>
           </div>
 
-          <div className="heroPlanGrid">
+          <div id="planos" className="heroPlanGrid">
             {planTiers.map((tier) => {
               const content = getHeroPlanContent(operation, tier);
+              const ctaHref = getPlanCtaHref(operation, tier.id, billingCycle);
 
               return (
                 <article key={tier.id} className={`heroPlanCard ${tier.highlight ? "heroPlanCardPopular" : ""}`}>
-                  {tier.highlight ? <span className="popularBadge">Mais popular</span> : null}
+                  {tier.highlight ? <span className="popularBadge">87% escolhem este</span> : null}
                   <h2>{content.title}</h2>
                   <p className="heroPlanTagline">{content.tagline}</p>
                   <p className="heroPlanDesc">{content.description}</p>
@@ -773,14 +854,27 @@ export default function PlanosPage() {
                       <li key={feature}>{feature}</li>
                     ))}
                   </ul>
-                  <a
-                    className={`heroPlanLink heroPlanLink-${content.ctaVariant}`}
-                    href={WHATSAPP_LINK}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {content.ctaLabel}
-                  </a>
+                  {isCheckoutHref(ctaHref) ? (
+                    <button
+                      type="button"
+                      className={`heroPlanLink heroPlanLink-${content.ctaVariant}`}
+                      onClick={() => setCheckoutUrl(ctaHref)}
+                    >
+                      {content.ctaLabel}
+                    </button>
+                  ) : (
+                    <a
+                      className={`heroPlanLink heroPlanLink-${content.ctaVariant}`}
+                      href={ctaHref}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {content.ctaLabel}
+                    </a>
+                  )}
+                  <p className={`plan-revenue-highlight plan-revenue-highlight-${tier.id}`}>
+                    {content.revenueHighlight}
+                  </p>
                 </article>
               );
             })}
@@ -1376,6 +1470,20 @@ export default function PlanosPage() {
           font-size: 11px;
           font-weight: 900;
           white-space: nowrap;
+          animation: popularBadgePulse 1.35s ease-in-out infinite;
+        }
+
+        @keyframes popularBadgePulse {
+          0%,
+          100% {
+            background: ${ORANGE};
+            box-shadow: 0 0 0 rgba(232, 82, 26, 0);
+          }
+
+          50% {
+            background: #ff6a2a;
+            box-shadow: 0 0 18px rgba(232, 82, 26, 0.5);
+          }
         }
 
         .heroPlanCard h2 {
@@ -1461,8 +1569,16 @@ export default function PlanosPage() {
           display: flex;
           align-items: center;
           justify-content: center;
+          font: inherit;
           font-weight: 900;
           text-align: center;
+          cursor: pointer;
+          transition: 0.2s ease;
+        }
+
+        .heroPlanLink:hover {
+          transform: translateY(-1px);
+          filter: brightness(0.98);
         }
 
         .heroPlanLink {
@@ -1483,6 +1599,30 @@ export default function PlanosPage() {
           border-color: ${DARK};
           color: #fff;
           background: ${DARK};
+        }
+
+        .plan-revenue-highlight {
+          margin: 12px 0 0;
+          border-radius: 999px;
+          padding: 8px 12px;
+          color: #000;
+          text-align: center;
+          font-size: 13px;
+          font-weight: 600;
+          line-height: 1.35;
+        }
+
+        .plan-revenue-highlight-start {
+          background: #fff4ee;
+        }
+
+        .plan-revenue-highlight-growth {
+          background: #e0f2fe;
+        }
+
+        .plan-revenue-highlight-pro {
+          background: ${BG_SOFT};
+          border: 1px solid ${BORDER};
         }
 
         .section {
