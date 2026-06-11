@@ -1642,12 +1642,12 @@ export default function PlanosPage() {
           grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1fr);
           gap: 42px;
           align-items: center;
-          background: linear-gradient(135deg, #fff 0%, ${BG_SOFT} 100%);
+          background: linear-gradient(135deg, #fff 0%, #fff7ed 52%, #f0f9ff 100%);
           box-shadow: 0 24px 60px rgba(17, 24, 39, 0.05);
         }
 
         .operationCopy h2 {
-          color: ${PRIMARY};
+          color: ${ORANGE};
           font-size: clamp(34px, 4vw, 54px);
           letter-spacing: -0.01em;
         }
@@ -1693,7 +1693,10 @@ export default function PlanosPage() {
 
         .pricingSection {
           color: ${TEXT};
-          background: ${BG_SOFT};
+          background:
+            radial-gradient(circle at 14% 10%, rgba(232, 82, 26, 0.1), transparent 30%),
+            radial-gradient(circle at 86% 0%, rgba(2, 132, 199, 0.08), transparent 28%),
+            linear-gradient(180deg, #fffaf5 0%, #f8fafc 100%);
         }
 
         .sectionHeader {
@@ -1722,14 +1725,14 @@ export default function PlanosPage() {
         }
 
         .operationTab:hover {
-          color: ${PRIMARY};
-          border-color: ${PRIMARY_LIGHT};
+          color: ${ORANGE};
+          border-color: ${ORANGE};
         }
 
         .operationTabActive {
-          border-color: ${PRIMARY};
+          border-color: ${ORANGE};
           color: #fff;
-          background: ${PRIMARY};
+          background: ${ORANGE};
         }
 
         .planGrid {
@@ -1749,8 +1752,8 @@ export default function PlanosPage() {
         }
 
         .planCardHighlight {
-          border-color: ${PRIMARY};
-          box-shadow: 0 18px 40px rgba(2, 132, 199, 0.1);
+          border-color: ${ORANGE};
+          box-shadow: 0 18px 40px rgba(232, 82, 26, 0.1);
         }
 
         .planBadge {
@@ -1775,7 +1778,7 @@ export default function PlanosPage() {
 
         .price {
           margin: 10px 0;
-          color: ${PRIMARY};
+          color: ${ORANGE};
           font-size: 26px;
           font-weight: 700;
         }
@@ -1824,8 +1827,8 @@ export default function PlanosPage() {
           height: fit-content;
           border-radius: 999px;
           padding: 8px 12px;
-          color: ${PRIMARY};
-          background: #e0f2fe;
+          color: ${ORANGE};
+          background: #fff4ee;
           font-weight: 800;
         }
 
@@ -1860,7 +1863,7 @@ export default function PlanosPage() {
         }
 
         .highlightCol {
-          background: #f0f9ff;
+          background: #fff7ed;
         }
 
         .featureMark {
@@ -1898,7 +1901,7 @@ export default function PlanosPage() {
         }
 
         .includeSliderHeader h2 span {
-          color: ${PRIMARY};
+          color: ${ORANGE};
         }
 
         .includeSliderHeader p {
@@ -1958,10 +1961,16 @@ export default function PlanosPage() {
         .includeSlideIcon {
           width: 38px;
           height: 38px;
-          border: 1px solid #bae6fd;
+          border: 1px solid #fed7aa;
           border-radius: 13px;
           display: grid;
           place-items: center;
+          color: ${ORANGE};
+          background: #fff7ed;
+        }
+
+        .includeSlideCard:nth-child(even) .includeSlideIcon {
+          border-color: #bae6fd;
           color: ${PRIMARY};
           background: #f0f9ff;
         }
@@ -1986,7 +1995,9 @@ export default function PlanosPage() {
         }
 
         .acceleratorSection {
-          background: #fff;
+          background:
+            radial-gradient(circle at 88% 12%, rgba(232, 82, 26, 0.08), transparent 26%),
+            #fff;
           border-top: 1px solid ${BORDER};
         }
 
@@ -2013,17 +2024,23 @@ export default function PlanosPage() {
 
         .acceleratorCard:hover {
           transform: translateY(-2px);
-          border-color: ${PRIMARY_LIGHT};
-          box-shadow: 0 20px 40px rgba(2, 132, 199, 0.08);
+          border-color: ${ORANGE};
+          box-shadow: 0 20px 40px rgba(232, 82, 26, 0.08);
         }
 
         .acceleratorIcon {
           width: 42px;
           height: 42px;
-          border: 1px solid #bae6fd;
+          border: 1px solid #fed7aa;
           border-radius: 13px;
           display: grid;
           place-items: center;
+          color: ${ORANGE};
+          background: #fff7ed;
+        }
+
+        .acceleratorCard:nth-child(even) .acceleratorIcon {
+          border-color: #bae6fd;
           color: ${PRIMARY};
           background: #f0f9ff;
         }
@@ -2043,7 +2060,7 @@ export default function PlanosPage() {
         }
 
         .faqSection {
-          background: ${BG_SOFT};
+          background: linear-gradient(180deg, #f8fafc 0%, #fff7ed 100%);
           border-top: 1px solid ${BORDER};
         }
 
@@ -2082,7 +2099,7 @@ export default function PlanosPage() {
           right: 20px;
           top: 50%;
           transform: translateY(-50%);
-          color: ${PRIMARY};
+          color: ${ORANGE};
           font-size: 22px;
           line-height: 1;
         }
